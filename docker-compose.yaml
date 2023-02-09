@@ -1,0 +1,36 @@
+version: '3'
+services:
+
+  # API
+  salvatore-test:
+    image: bgpcloudsbx.azurecr.io/salvatore-test:0.0.1
+    platform: linux/amd64
+    ports:
+    - "3000:3000"
+    depends_on:
+    - salvatore-mysql
+ 
+    restart: always
+    container_name: salvatore-test
+    networks:
+      - net
+
+
+  # MSSQL
+  salvatore-mysql:
+    image: mysql:5.7
+    platform: linux/amd64
+    ports:
+    - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=AsdNOD..02.
+    volumes:
+      - C:\Users\Public\Documents\Docker:/var/lib/mysql
+    container_name: salvatore-mysql
+    networks:
+      - net
+
+# Network
+networks:
+  net:
+    driver: bridge
